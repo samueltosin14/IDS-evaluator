@@ -31,7 +31,10 @@ def fetch_precision_data(es, index_pattern, agent_details, start_time, end_time)
         false_positives = es.count(index=index_pattern, body={"query": fp_query})['count']
         
         # Calculate precision if applicable
-        precision = true_positives / (true_positives + false_positives) if (true_positives + false_positives) > 0 else 0
+        if (true_positives + false_positives) > 0:
+            precision = (true_positives / (true_positives + false_positives)) * 100  # Convert to percentage
+        else:
+            precision = 0  # Set precision to 0% if no positives found
         results[agent_name] = precision
     
     return results
@@ -66,8 +69,8 @@ end_time = '2024-08-19T23:00:00Z'    # End of the specified time range
 
 try:
     snort_precision, suricata_precision, recommendation = evaluate_ids_precision(es, start_time, end_time)
-    print(f"Snort Precision: {snort_precision}")
-    print(f"Suricata Precision: {suricata_precision}")
+    print(f"Snort Precision: {snort_precision:.2f}%")
+    print(f"Suricata Precision: {suricata_precision:.2f}%")
     print(recommendation)
 except Exception as e:
     print(f"An error occurred: {e}")
