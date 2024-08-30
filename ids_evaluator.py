@@ -64,8 +64,8 @@ def evaluate_ids_precision(es, start_time, end_time):
 # Example usage
 es = Elasticsearch(['http://localhost:9200'])
 
-start_time = '2024-08-19T17:00:00Z'  # Start of the specified time range
-end_time = '2024-08-19T23:00:00Z'    # End of the specified time range
+start_time = '2024-08-28T13:00:00Z'  # Start of the specified time range
+end_time = '2024-08-28T13:15:00Z'    # End of the specified time range
 
 try:
     snort_precision, suricata_precision, recommendation = evaluate_ids_precision(es, start_time, end_time)
