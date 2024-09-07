@@ -34,6 +34,8 @@ def evaluate_ids(es, snort_index_pattern, suricata_index_pattern, start_time, en
     metrics = {
         "detection_accuracy": {},
         "true_positives": {"snort": snort_count, "suricata": suricata_count},
+        "false positive":
+        "true negative":
         "false_negatives": {}
     }
     
